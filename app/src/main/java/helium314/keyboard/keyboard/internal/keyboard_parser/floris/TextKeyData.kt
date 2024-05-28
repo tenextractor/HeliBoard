@@ -52,6 +52,7 @@ sealed interface KeyData : AbstractKeyData {
     val popup: PopupSet<out AbstractKeyData> // not nullable because can't add number otherwise
     val width: Float // in percent of keyboard width, 0 is default (depends on key), -1 is fill (like space bar)
     val labelFlags: Int
+    val isDeadKey: Boolean
 
     fun copy(newType: KeyType? = type, newCode: Int = code, newLabel: String = label, newGroupId: Int = groupId,
              newPopup: PopupSet<out AbstractKeyData> = popup, newWidth: Float = width, newLabelFlags: Int = labelFlags): KeyData
@@ -372,6 +373,7 @@ sealed interface KeyData : AbstractKeyData {
                     newLabelFlags,
                     background,
                     newPopupKeys,
+                    isDeadKey
                 )
             } else {
                 Key.KeyParams(
@@ -381,6 +383,7 @@ sealed interface KeyData : AbstractKeyData {
                     newLabelFlags,
                     background,
                     newPopupKeys,
+                    isDeadKey
                 )
             }
         } else {
@@ -392,6 +395,7 @@ sealed interface KeyData : AbstractKeyData {
                 newLabelFlags,
                 background,
                 newPopupKeys,
+                isDeadKey
             )
         }
     }
@@ -546,7 +550,8 @@ class TextKeyData(
     override val groupId: Int = KeyData.GROUP_DEFAULT,
     override val popup: PopupSet<out AbstractKeyData> = SimplePopups(null),
     override val width: Float = 0f,
-    override val labelFlags: Int = 0
+    override val labelFlags: Int = 0,
+    override val isDeadKey: Boolean = false
 ) : KeyData {
     override fun asString(isForDisplay: Boolean): String {
         return buildString {
@@ -588,7 +593,8 @@ class AutoTextKeyData(
     override val groupId: Int = KeyData.GROUP_DEFAULT,
     override val popup: PopupSet<out AbstractKeyData> = SimplePopups(null),
     override val width: Float = 0f,
-    override val labelFlags: Int = 0
+    override val labelFlags: Int = 0,
+    override val isDeadKey: Boolean = false
 ) : KeyData {
 
     override fun asString(isForDisplay: Boolean): String {
@@ -629,7 +635,8 @@ class MultiTextKeyData(
     override val groupId: Int = KeyData.GROUP_DEFAULT,
     override val popup: PopupSet<out AbstractKeyData> = SimplePopups(null),
     override val width: Float = 0f,
-    override val labelFlags: Int = 0
+    override val labelFlags: Int = 0,
+    override val isDeadKey: Boolean = false
 ) : KeyData {
     @Transient override val code: Int = KeyCode.MULTIPLE_CODE_POINTS
 
