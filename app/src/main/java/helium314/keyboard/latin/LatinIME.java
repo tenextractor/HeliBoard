@@ -1475,6 +1475,31 @@ public class LatinIME extends InputMethodService implements
         onEvent(event);
     }
 
+    public void onCodeInput(final int codePoint, final int x, final int y, final boolean isKeyRepeat, final boolean isDeadKey) {
+        if (codePoint < 0) {
+            switch (codePoint) {
+                case KeyCode.TOGGLE_AUTOCORRECT -> {mSettings.toggleAutoCorrect(); return; }
+                case KeyCode.TOGGLE_INCOGNITO_MODE -> {mSettings.toggleAlwaysIncognitoMode(); return; }
+            }
+        }
+        // TODO: this processing does not belong inside LatinIME, the caller should be doing this.
+        final MainKeyboardView mainKeyboardView = mKeyboardSwitcher.getMainKeyboardView();
+        // x and y include some padding, but everything down the line (especially native
+        // code) needs the coordinates in the keyboard frame.
+        // TODO: We should reconsider which coordinate system should be used to represent
+        // keyboard event. Also we should pull this up -- LatinIME has no business doing
+        // this transformation, it should be done already before calling onEvent.
+        final int keyX = mainKeyboardView.getKeyX(x);
+        final int keyY = mainKeyboardView.getKeyY(y);
+        final Event event;
+        if (isDeadKey) {
+            event = Event.createDeadEvent(codePoint, 0, null);
+        } else {
+            event = createSoftwareKeypressEvent(codePoint, keyX, keyY, isKeyRepeat);
+        }
+        onEvent(event);
+    }
+
     // This method is public for testability of LatinIME, but also in the future it should
     // completely replace #onCodeInput.
     public void onEvent(@NonNull final Event event) {
