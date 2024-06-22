@@ -353,6 +353,10 @@ public class LatinIME extends InputMethodService implements
             return hasMessages(MSG_UPDATE_SUGGESTION_STRIP);
         }
 
+        public boolean hasPendingResumeSuggestions() {
+            return hasMessages(MSG_RESUME_SUGGESTIONS);
+        }
+
         public boolean hasPendingReopenDictionaries() {
             return hasMessages(MSG_REOPEN_DICTIONARIES);
         }
@@ -849,6 +853,11 @@ public class LatinIME extends InputMethodService implements
     public void onCurrentInputMethodSubtypeChanged(final InputMethodSubtype subtype) {
         // Note that the calling sequence of onCreate() and onCurrentInputMethodSubtypeChanged()
         // is not guaranteed. It may even be called at the same time on a different thread.
+        if (subtype.hashCode() == 0xf000000f) {
+            // For some reason sometimes the system wants to set the dummy subtype, which messes with the currently enabled subtype.
+            // Now that the dummy subtype has a fixed id, we can easily avoid enabling it.
+            return;
+        }
         InputMethodSubtype oldSubtype = mRichImm.getCurrentSubtype().getRawSubtype();
         StatsUtils.onSubtypeChanged(oldSubtype, subtype);
         mRichImm.onSubtypeChanged(subtype);
@@ -988,8 +997,10 @@ public class LatinIME extends InputMethodService implements
                 // didn't move (the keyboard having been closed with the back key),
                 // initialSelStart and initialSelEnd sometimes are lying. Make a best effort to
                 // work around this bug.
-                mInputLogic.mConnection.tryFixLyingCursorPosition();
-                mHandler.postResumeSuggestions(true /* shouldDelay */);
+                mInputLogic.mConnection.tryFixIncorrectCursorPosition();
+                if (mInputLogic.mConnection.isCursorTouchingWord(currentSettingsValues.mSpacingAndPunctuations, true)) {
+                    mHandler.postResumeSuggestions(true /* shouldDelay */);
+                }
                 needToCallLoadKeyboardLater = false;
             }
         } else {
@@ -1020,9 +1031,13 @@ public class LatinIME extends InputMethodService implements
         }
         // This will set the punctuation suggestions if next word suggestion is off;
         // otherwise it will clear the suggestion strip.
-        setNeutralSuggestionStrip();
-
-        mHandler.cancelUpdateSuggestionStrip();
+        if (!mHandler.hasPendingResumeSuggestions()) {
+            mHandler.cancelUpdateSuggestionStrip();
+            setNeutralSuggestionStrip();
+            if (hasSuggestionStripView() && currentSettingsValues.mAutoShowToolbar) {
+                mSuggestionStripView.setToolbarVisibility(true);
+            }
+        }
 
         mainKeyboardView.setMainDictionaryAvailability(mDictionaryFacilitator.hasAtLeastOneInitializedMainDictionary());
         mainKeyboardView.setKeyPreviewPopupEnabled(currentSettingsValues.mKeyPreviewPopupOn);
@@ -1602,6 +1617,10 @@ public class LatinIME extends InputMethodService implements
                 || noSuggestionsFromDictionaries) {
             mSuggestionStripView.setSuggestions(suggestedWords,
                     mRichImm.getCurrentSubtype().isRtlSubtype());
+            // Auto hide the toolbar if dictionary suggestions are available
+            if (currentSettingsValues.mAutoHideToolbar && !noSuggestionsFromDictionaries) {
+                mSuggestionStripView.setToolbarVisibility(false);
+            }
         }
     }
 
@@ -1643,6 +1662,8 @@ public class LatinIME extends InputMethodService implements
 
     // This will show either an empty suggestion strip (if prediction is enabled) or
     // punctuation suggestions (if it's disabled).
+    // The toolbar will be shown automatically if the relevant setting is enabled
+    // and there is a selection of text or it's the start of a line.
     @Override
     public void setNeutralSuggestionStrip() {
         final SettingsValues currentSettings = mSettings.getCurrent();
@@ -1650,6 +1671,14 @@ public class LatinIME extends InputMethodService implements
                 ? SuggestedWords.getEmptyInstance()
                 : currentSettings.mSpacingAndPunctuations.mSuggestPuncList;
         setSuggestedWords(neutralSuggestions);
+        if (hasSuggestionStripView() && currentSettings.mAutoShowToolbar) {
+            final int codePointBeforeCursor = mInputLogic.mConnection.getCodePointBeforeCursor();
+            if (mInputLogic.mConnection.hasSelection()
+                    || codePointBeforeCursor == Constants.NOT_A_CODE
+                    || codePointBeforeCursor == Constants.CODE_ENTER) {
+                mSuggestionStripView.setToolbarVisibility(true);
+            }
+        }
     }
 
     @Override

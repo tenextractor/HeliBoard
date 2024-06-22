@@ -11,6 +11,8 @@ import helium314.keyboard.latin.settings.USER_DICTIONARY_SUFFIX
 import helium314.keyboard.latin.utils.CUSTOM_LAYOUT_PREFIX
 import helium314.keyboard.latin.utils.DeviceProtectedUtils
 import helium314.keyboard.latin.utils.DictionaryInfoUtils
+import helium314.keyboard.latin.utils.ToolbarKey
+import helium314.keyboard.latin.utils.defaultPinnedToolbarPref
 import helium314.keyboard.latin.utils.getCustomLayoutFile
 import helium314.keyboard.latin.utils.onCustomLayoutFileListChanged
 import helium314.keyboard.latin.utils.upgradeToolbarPrefs
@@ -39,7 +41,6 @@ fun checkVersionUpgrade(context: Context) {
     val oldVersion = prefs.getInt(Settings.PREF_VERSION_CODE, 0)
     if (oldVersion == BuildConfig.VERSION_CODE)
         return
-    upgradeToolbarPrefs(prefs)
     // clear extracted dictionaries, in case updated version contains newer ones
     DictionaryInfoUtils.getCachedDirectoryList(context)?.forEach {
         if (!it.isDirectory) return@forEach
@@ -73,6 +74,26 @@ fun checkVersionUpgrade(context: Context) {
             putString(Settings.PREF_SELECTED_SUBTYPE, selectedSubtype)
         }
     }
+    if (oldVersion <= 2000) {
+        // upgrade pinned toolbar keys pref
+        val oldPinnedKeysPref = prefs.getString(Settings.PREF_PINNED_TOOLBAR_KEYS, "")!!
+        val pinnedKeys = oldPinnedKeysPref.split(";").mapNotNull {
+            try {
+                ToolbarKey.valueOf(it)
+            } catch (_: IllegalArgumentException) {
+                null
+            }
+        }
+        val newPinnedKeysPref = (pinnedKeys.map { "${it.name},true" } + defaultPinnedToolbarPref.split(";"))
+            .distinctBy { it.split(",").first() }
+            .joinToString(";")
+        prefs.edit { putString(Settings.PREF_PINNED_TOOLBAR_KEYS, newPinnedKeysPref) }
+
+        // enable language switch key if it was enabled previously
+        if (prefs.contains(Settings.PREF_LANGUAGE_SWITCH_KEY) && prefs.getString(Settings.PREF_LANGUAGE_SWITCH_KEY, "") != "off")
+            prefs.edit { putBoolean(Settings.PREF_SHOW_LANGUAGE_SWITCH_KEY, true) }
+    }
+    upgradeToolbarPrefs(prefs)
     onCustomLayoutFileListChanged() // just to be sure
     prefs.edit { putInt(Settings.PREF_VERSION_CODE, BuildConfig.VERSION_CODE) }
 }

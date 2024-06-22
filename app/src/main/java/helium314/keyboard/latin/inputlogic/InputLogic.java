@@ -148,9 +148,9 @@ public final class InputLogic {
         mRecapitalizeStatus.disable(); // Do not perform recapitalize until the cursor is moved once
         mCurrentlyPressedHardwareKeys.clear();
         mSuggestedWords = SuggestedWords.getEmptyInstance();
-        // In some cases (namely, after rotation of the device) editorInfo.initialSelStart is lying
-        // so we try using some heuristics to find out about these and fix them.
-        mConnection.tryFixLyingCursorPosition();
+        // In some cases (e.g. after rotation of the device, or when scrolling the text before bringing up keyboard)
+        // editorInfo.initialSelStart is not the actual cursor position, so we try using some heuristics to find the correct position.
+        mConnection.tryFixIncorrectCursorPosition();
         cancelDoubleSpacePeriodCountdown();
         if (InputLogicHandler.NULL_HANDLER == mInputLogicHandler) {
             mInputLogicHandler = new InputLogicHandler(mLatinIME, this);
@@ -1311,7 +1311,7 @@ public final class InputLogic {
                         // TODO: Add a new StatsUtils method onBackspaceWhenNoText()
                         return;
                     }
-                    final int lengthToDelete = Character.isSupplementaryCodePoint(codePointBeforeCursor)
+                    final int lengthToDelete = codePointBeforeCursor > 0xFE00
                             ? mConnection.getCharCountToDeleteBeforeCursor() : 1;
                     mConnection.deleteTextBeforeCursor(lengthToDelete);
                     int totalDeletedLength = lengthToDelete;
@@ -1324,7 +1324,7 @@ public final class InputLogic {
                         final int codePointBeforeCursorToDeleteAgain =
                                 mConnection.getCodePointBeforeCursor();
                         if (codePointBeforeCursorToDeleteAgain != Constants.NOT_A_CODE) {
-                            final int lengthToDeleteAgain = Character.isSupplementaryCodePoint(codePointBeforeCursorToDeleteAgain)
+                            final int lengthToDeleteAgain = codePointBeforeCursor > 0xFE00
                                     ? mConnection.getCharCountToDeleteBeforeCursor() : 1;
                             mConnection.deleteTextBeforeCursor(lengthToDeleteAgain);
                             totalDeletedLength += lengthToDeleteAgain;
@@ -1353,9 +1353,7 @@ public final class InputLogic {
         if (!mConnection.hasSelection()
                 && settingsValues.isSuggestionsEnabledPerUserSettings()
                 && settingsValues.mSpacingAndPunctuations.mCurrentLanguageHasSpaces) {
-            final TextRange range = mConnection.getWordRangeAtCursor(
-                    settingsValues.mSpacingAndPunctuations,
-                    currentKeyboardScript, false);
+            final TextRange range = mConnection.getWordRangeAtCursor(settingsValues.mSpacingAndPunctuations, currentKeyboardScript);
             if (range != null) {
                 return range.mWord.toString();
             }
@@ -1709,8 +1707,7 @@ public final class InputLogic {
             mConnection.finishComposingText();
             return;
         }
-        final TextRange range =
-                mConnection.getWordRangeAtCursor(settingsValues.mSpacingAndPunctuations, currentKeyboardScript, true);
+        final TextRange range = mConnection.getWordRangeAtCursor(settingsValues.mSpacingAndPunctuations, currentKeyboardScript);
         if (null == range) return; // Happens if we don't have an input connection at all
         if (range.length() <= 0) {
             // Race condition, or touching a word in a non-supported script.
@@ -2383,7 +2380,7 @@ public final class InputLogic {
             // If remainingTries is 0, we should stop waiting for new tries, however we'll still
             // return true as we need to perform other tasks (for example, loading the keyboard).
         }
-        mConnection.tryFixLyingCursorPosition();
+        mConnection.tryFixIncorrectCursorPosition();
         if (tryResumeSuggestions) {
             handler.postResumeSuggestions(true /* shouldDelay */);
         }
@@ -2454,7 +2451,9 @@ public final class InputLogic {
             spannable.setSpan(backgroundColorSpan, 0, spanLength, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE | Spanned.SPAN_COMPOSING);
             composingTextToBeSet = spannable;
         }
-        mConnection.setComposingText(composingTextToBeSet, newCursorPosition);
+        if (!mConnection.setComposingText(composingTextToBeSet, newCursorPosition))
+            // inconsistency in set and found composing text, better cancel composing (should be restarted automatically)
+            mWordComposer.reset();
     }
 
     /**

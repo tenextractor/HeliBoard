@@ -79,12 +79,18 @@
             android:defaultValue="true"
             android:persistent="true" />
 
+        <SwitchPreference
+            android:key="show_language_switch_key"
+            android:title="@string/show_language_switch_key"
+            android:defaultValue="false"
+            android:persistent="true" />
+
         <ListPreference
             android:key="language_switch_key"
-            android:title="@string/show_language_switch_key"
+            android:title="@string/language_switch_key_behavior"
             android:entries="@array/language_switch_key_entries"
             android:entryValues="@array/language_switch_key_values"
-            android:defaultValue="off"
+            android:defaultValue="internal"
             android:summary="%s"
             android:persistent="true"
             latin:singleLineTitle="false" />
@@ -93,21 +99,6 @@
             android:key="show_emoji_key"
             android:title="@string/show_emoji_key"
             android:defaultValue="false"
-            android:persistent="true" />
-
-        <Preference
-            android:key="toolbar_keys"
-            android:title="@string/toolbar_keys" />
-
-        <Preference
-            android:key="clipboard_toolbar_keys"
-            android:title="@string/clipboard_toolbar_keys" />
-
-        <SwitchPreference
-            android:key="var_toolbar_direction"
-            android:title="@string/var_toolbar_direction"
-            android:summary="@string/var_toolbar_direction_summary"
-            android:defaultValue="true"
             android:persistent="true" />
 
     </PreferenceCategory>
