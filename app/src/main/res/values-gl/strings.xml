@@ -8,7 +8,7 @@
     <string name="use_contacts_for_spellchecking_option_summary">"O corrector ortográfico utiliza entradas da lista de contactos"</string>
     <string name="vibrate_on_keypress">"Vibrar ao premer as teclas"</string>
     <string name="sound_on_keypress">"Son ao premer as teclas"</string>
-    <string name="popup_on_keypress">"Ventás emerxentes ao premer as teclas"</string>
+    <string name="popup_on_keypress">Emerxentes ao premer as teclas</string>
     <string name="settings_screen_preferences">"Preferencias"</string>
     <string name="settings_screen_gesture">"Escritura por xestos"</string>
     <string name="settings_screen_correction">Ortografía</string>
@@ -45,7 +45,6 @@
     <string name="gesture_input_summary">"Pasa o dedo entre as letras para introducir unha palabra"</string>
     <string name="gesture_preview_trail">"Mostrar percorrido dos xestos"</string>
     <string name="gesture_floating_preview_text">"Vista previa flotante dinámica"</string>
-    <string name="gesture_floating_preview_text_summary">"Mostra a palabra suxerida mentres se fan xestos"</string>
     <string name="gesture_space_aware">"Xesto de frase"</string>
     <string name="gesture_space_aware_summary">"Para introducir espazos nos xestos, pasa o dedo cara a tecla de espazo"</string>
     <string name="subtype_en_GB">"Inglés (Reino Unido)"</string>
@@ -159,7 +158,7 @@
     <string name="theme_name_user" tools:keep="@string/theme_name_user">Persoal</string>
     <string name="theme_name_user_night" tools:keep="@string/theme_name_user_night">Persoal (claro)</string>
     <string name="select_user_colors">Axustar cores</string>
-    <string name="auto_user_color">Elexir cor automáticamente</string>
+    <string name="auto_user_color">Elixir cor automáticamente</string>
     <string name="main_colors">Mostrar só cores principais</string>
     <string name="all_colors">Mostrar todas as cores</string>
     <string name="hint_show_keyboard">Preme para vista previa</string>
@@ -223,7 +222,7 @@
     <string name="autospace_after_punctuation">Espazo após puntuación</string>
     <string name="autospace_after_punctuation_summary">Engadir un espazo automáticamente despois de escribir un signo de puntuación</string>
     <string name="show_popup_keys_title">Mostrar máis letras co signos diacríticos nas emerxentes</string>
-    <string name="show_popup_keys_normal">Mostrar variantes definidas nos idiomas do teclado (por defecto)</string>
+    <string name="show_popup_keys_normal">Mostrar variantes definidas nos idiomas do teclado</string>
     <string name="show_popup_keys_more">Engadir variantes comúns</string>
     <string name="show_popup_keys_all">Engadir todas as variables dispoñibles</string>
     <string name="url_detection_title">Detección de URL</string>
@@ -236,7 +235,7 @@
     <string name="localized_number_row">Traducir número de fila</string>
     <string name="show_hints">Mostrar suxestións de teclas</string>
     <string name="show_hints_summary">Mostrar suxestións ao manter presa</string>
-    <string name="hint_source">Elexir fonte da suxestión</string>
+    <string name="hint_source">Escoller fonte da suxestión</string>
     <string name="popup_order">Elixe a orde das teclas na emerxente</string>
     <string name="popup_keys_number" tools:keep="@string/popup_keys_number">Fila de números</string>
     <string name="popup_keys_language" tools:keep="@string/popup_keys_language">Idioma</string>
@@ -247,7 +246,7 @@
     <string name="clipboard" tools:keep="@string/clipboard">Portapapeis</string>
     <string name="clear_clipboard" tools:keep="@string/clear_clipboard">Limpar portapapeis</string>
     <string name="voice" tools:keep="@string/voice">Escribir por voz</string>
-    <string name="select_word" tools:keep="@string/select_word">Elexir palabra</string>
+    <string name="select_word" tools:keep="@string/select_word">Seleccionar palabra</string>
     <string name="one_handed" tools:keep="@string/one_handed">Modo dunha sóa man</string>
     <string name="full_left" tools:keep="@string/full_left">Só esquerda</string>
     <string name="full_right" tools:keep="@string/full_right">Só dereita</string>
@@ -284,7 +283,7 @@
     <string name="internal_dictionary_summary">Dicionario interno principal</string>
     <string name="add_new_dictionary_title">Engadir dicionario desde ficheiro</string>
     <string name="add_new_dictionary_ask_locale">A que idioma deberiamos engadir o dicionario \"%1$s\" de %2$s?</string>
-    <string name="button_select_language">Elexir idioma</string>
+    <string name="button_select_language">Elixir idioma</string>
     <string name="button_add_to_language">Engadir a %s</string>
     <string name="replace_dictionary">Substituír dicionario</string>
     <string name="remove_dictionary_message">Tes certeza de querer substituír o dicionario engadido \"%s\"?</string>
@@ -352,7 +351,7 @@
     <string name="subtype_mns">Mansi</string>
     <string name="subtype_with_layout_mns" tools:keep="@string/subtype_with_layout_mns">Mansi (<xliff:g id="KEYBOARD_LAYOUT" example="QWERTY">%s</xliff:g>)</string>
     <string name="more_colors">Mostrar máis cores</string>
-    <string name="all_colors_warning">Este axuste expón todas as cores que se usan internamente. A lista de cores pode cambiar en calquera momento. Non hai cor por defecto, e os nomes non serán traduciddos.</string>
+    <string name="all_colors_warning">Este axuste expón todas as cores que se usan internamente. A lista de cores pode cambiar en calquera momento. A cor por defecto é aleatoria, e os nomes non serán traduciddos.</string>
     <string name="layout_functional_keys" tools:keep="@string/layout_functional_keys">Teclas función</string>
     <string name="layout_functional_keys_symbols_shifted" tools:keep="@string/layout_functional_keys_symbols_shifted">Teclas función (Máis símbolos)</string>
     <string name="customize_functional_key_layouts">Personalizar a disposición de teclas función</string>
@@ -368,4 +367,37 @@
     <string name="auto_hide_toolbar_summary">Agocha a barra de ferramentas ao estar dispoñibles as suxestións</string>
     <string name="language_switch_key_behavior">Comportamento da tecla de cambio de idioma</string>
     <string name="emoji" tools:keep="@string/emoji">Emoji</string>
+    <string name="gesture_fast_typing_cooldown">Escribir con repouso</string>
+    <string name="gesture_fast_typing_cooldown_instant">Comezar sempre ao momento</string>
+    <string name="customize_currencies">Personalizar divisas</string>
+    <string name="customize_currencies_detail">Escolle o símbolo da divisa principal e 6 máis, separados por espazos</string>
+    <string name="button_save_file">Gardar nun ficheiro</string>
+    <string name="copy_to_clipboard">Copiar ao Portapapeis</string>
+    <string name="load">Cargar</string>
+    <string name="load_will_overwrite">Ao cargar sobreescribe o decorado actual</string>
+    <string name="page_start" tools:keep="@string/page_start">Inicio da páxina</string>
+    <string name="page_end" tools:keep="@string/page_end">Final da páxina</string>
+    <string name="word_left" tools:keep="@string/word_left">Esquerda da palabra</string>
+    <string name="word_right" tools:keep="@string/word_right">Dereita da palabra</string>
+    <string name="page_up" tools:keep="@string/page_up">Páxina superior</string>
+    <string name="page_down" tools:keep="@string/page_down">Páxina inferior</string>
+    <string name="suggest_clipboard_content">Suxerir contido do portapapeis</string>
+    <string name="suggest_clipboard_content_summary">Mostra como suxestión ocontido copiado recentemente ao portapapeis</string>
+    <string name="switch_keyboard_after">Cambiar ao teclado principal após…</string>
+    <string name="space_swipe_toggle_numpad_entry">Ver Teclado Numérico</string>
+    <string name="show_popup_keys_main">Engadir variantes moi comúns (por defecto)</string>
+    <string name="remove_redundant_popups">Retirar emerxentes redundantes</string>
+    <string name="remove_redundant_popups_summary">Retira as letras emerxentes que están presentes na disposición base</string>
+    <string name="after_symbol_and_space">Premer no enter o espazo despois doutras teclas na vista de símbolos</string>
+    <string name="after_emoji">Seleccionar emoji na vista de emojis</string>
+    <string name="after_clip">Seleccionar entrada no historial do portapapeis</string>
+    <string name="gesture_floating_preview_static_summary">Ver a palabra suxerida ao facer o xesto</string>
+    <string name="gesture_floating_preview_dynamic_summary">Mover a vista previa durante o xesto</string>
+    <string name="gesture_trail_fadeout_duration">Duración do xesto</string>
+    <string name="gesture_floating_preview_static">Vista previa aboiando</string>
+    <string name="layout_number_row" tools:keep="@string/layout_number_row">Número de fila</string>
+    <string name="icon_style">Estilo da icona</string>
+    <string name="prefs_space_bar_text">Texto persoal na barra de espazo</string>
+    <string name="layout_emoji_bottom_row" tools:keep="@string/layout_emoji_bottom_row">Liña inferior de emoji</string>
+    <string name="layout_clip_bottom_row" tools:keep="@string/layout_clip_bottom_row">Liña inferior de portapapeis</string>
 </resources>

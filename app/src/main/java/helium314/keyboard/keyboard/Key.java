@@ -361,6 +361,8 @@ public class Key implements Comparable<Key> {
     @NonNull
     public static Key removeRedundantPopupKeys(@NonNull final Key key,
             @NonNull final PopupKeySpec.LettersOnBaseLayout lettersOnBaseLayout) {
+        if ((key.mPopupKeysColumnAndFlags & POPUP_KEYS_FLAGS_FIXED_COLUMN) != 0)
+            return key; // don't remove anything for fixed column popup keys
         final PopupKeySpec[] popupKeys = key.getPopupKeys();
         final PopupKeySpec[] filteredPopupKeys = PopupKeySpec.removeRedundantPopupKeys(
                 popupKeys, lettersOnBaseLayout);
@@ -522,8 +524,11 @@ public class Key implements Comparable<Key> {
     }
 
     public final boolean isModifier() {
-        return mCode == KeyCode.SHIFT || mCode == KeyCode.SYMBOL_ALPHA || mCode == KeyCode.ALPHA || mCode == KeyCode.SYMBOL
-                || mCode == KeyCode.CTRL || mCode == KeyCode.ALT || mCode == KeyCode.FN || mCode == KeyCode.META;
+        return switch (mCode) {
+            case KeyCode.SHIFT, KeyCode.SYMBOL_ALPHA, KeyCode.ALPHA, KeyCode.SYMBOL, KeyCode.NUMPAD, KeyCode.CTRL,
+                    KeyCode.ALT, KeyCode.FN, KeyCode.META -> true;
+            default -> false;
+        };
     }
 
     public final boolean isRepeatable() {
@@ -940,11 +945,12 @@ public class Key implements Comparable<Key> {
         final String iconName = getIconName();
         if (iconName == null) return false;
         // todo: other way of identifying the color?
-        //  if yes, NAME_CLIPBOARD_ACTION_KEY and NAME_CLIPBOARD_NORMAL_KEY could be merged
+        //  this should be done differently, as users can set any icon now
+        //  how is the background drawable selected? can we use the same way?
         return iconName.equals(KeyboardIconsSet.NAME_NEXT_KEY)
                 || iconName.equals(KeyboardIconsSet.NAME_PREVIOUS_KEY)
-                || iconName.equals(KeyboardIconsSet.NAME_CLIPBOARD_ACTION_KEY)
-                || iconName.equals(KeyboardIconsSet.NAME_EMOJI_ACTION_KEY);
+                || iconName.equals("clipboard_action_key")
+                || iconName.equals("emoji_action_key");
     }
 
     public boolean hasFunctionalBackground() {
@@ -1182,13 +1188,19 @@ public class Key implements Comparable<Key> {
             if (mCode <= Constants.CODE_SPACE && mCode != KeyCode.MULTIPLE_CODE_POINTS && mIconName == null)
                 actionFlags |= ACTION_FLAGS_NO_KEY_PREVIEW;
             switch (mCode) {
-                case KeyCode.DELETE, KeyCode.SHIFT, Constants.CODE_ENTER, KeyCode.SHIFT_ENTER, KeyCode.ALPHA, Constants.CODE_SPACE, KeyCode.NUMPAD,
-                        KeyCode.SYMBOL, KeyCode.SYMBOL_ALPHA, KeyCode.LANGUAGE_SWITCH, KeyCode.EMOJI, KeyCode.CLIPBOARD -> actionFlags |= ACTION_FLAGS_NO_KEY_PREVIEW; // no preview even if icon!
+            case KeyCode.DELETE, KeyCode.ARROW_LEFT, KeyCode.ARROW_RIGHT, KeyCode.ARROW_UP, KeyCode.ARROW_DOWN,
+                    KeyCode.WORD_LEFT, KeyCode.WORD_RIGHT, KeyCode.PAGE_UP, KeyCode.PAGE_DOWN:
+                // repeating is disabled if a key is configured with pop-ups
+                if (mPopupKeys == null)
+                    actionFlags |= ACTION_FLAGS_IS_REPEATABLE;
+                // fallthrough
+            case KeyCode.SHIFT, Constants.CODE_ENTER, KeyCode.SHIFT_ENTER, KeyCode.ALPHA, Constants.CODE_SPACE, KeyCode.NUMPAD,
+                    KeyCode.SYMBOL, KeyCode.SYMBOL_ALPHA, KeyCode.LANGUAGE_SWITCH, KeyCode.EMOJI, KeyCode.CLIPBOARD,
+                    KeyCode.MOVE_START_OF_LINE, KeyCode.MOVE_END_OF_LINE, KeyCode.MOVE_START_OF_PAGE, KeyCode.MOVE_END_OF_PAGE:
+                actionFlags |= ACTION_FLAGS_NO_KEY_PREVIEW; // no preview even if icon!
             }
             if (mCode == KeyCode.SETTINGS || mCode == KeyCode.LANGUAGE_SWITCH)
                 actionFlags |= ACTION_FLAGS_ALT_CODE_WHILE_TYPING;
-            if (mCode == KeyCode.DELETE)
-                actionFlags |= ACTION_FLAGS_IS_REPEATABLE;
             mActionFlags = actionFlags;
 
             final int altCodeInAttr; // settings and language switch keys have alt code space, all others nothing

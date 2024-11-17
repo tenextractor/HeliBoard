@@ -46,16 +46,15 @@
     <string name="gesture_input_summary">"Вводите слова, не отрывая пальца от клавиатуры"</string>
     <string name="gesture_preview_trail">Рисовать линию</string>
     <string name="gesture_floating_preview_text">Показывать подсказки</string>
-    <string name="gesture_floating_preview_text_summary">Показывать подсказки при вводе текста</string>
     <string name="gesture_space_aware">Непрерывный ввод фраз</string>
     <string name="gesture_space_aware_summary">Проводите по клавише пробела после каждого слова</string>
     <string name="subtype_en_GB">Английский (Великобритания)</string>
     <string name="subtype_en_US">Английский (США)</string>
     <string name="subtype_es_US">Испанский (США)</string>
-    <string name="subtype_hi_Latn">хинглиш</string>
+    <string name="subtype_hi_Latn">Хинглиш</string>
     <string name="subtype_mns">Мансийский</string>
-    <string name="subtype_xdq">кайтагский</string>
-    <string name="subtype_sr_Latn">сербский (латиница)</string>
+    <string name="subtype_xdq">Кайтагский</string>
+    <string name="subtype_sr_Latn">Сербский (латиница)</string>
     <string name="subtype_with_layout_en_GB">Английский (Великобритания) (<xliff:g id="KEYBOARD_LAYOUT" example="QWERTY">%s</xliff:g>)</string>
     <string name="subtype_with_layout_en_US">Английский (США) (<xliff:g id="KEYBOARD_LAYOUT" example="QWERTY">%s</xliff:g>)</string>
     <string name="subtype_with_layout_es_US">Испанский (США) (<xliff:g id="KEYBOARD_LAYOUT" example="QWERTY">%s</xliff:g>)</string>
@@ -65,7 +64,7 @@
     <string name="subtype_with_layout_sr_Latn">Сербский (<xliff:g id="KEYBOARD_LAYOUT" example="QWERTY">%s</xliff:g>)</string>
     <string name="subtype_generic_traditional"><xliff:g id="LANGUAGE_NAME" example="Непальский">%s</xliff:g> (Традиционная)</string>
     <string name="subtype_generic_compact"><xliff:g id="LANGUAGE_NAME" example="Хинди">%s</xliff:g> (Компактная)</string>
-    <string name="subtype_no_language">стандартная (латиница)</string>
+    <string name="subtype_no_language">Стандартная (латиница)</string>
     <string name="subtype_no_language_qwerty">Латиница (QWERTY)</string>
     <string name="subtype_no_language_qwertz">Латиница (QWERTZ)</string>
     <string name="subtype_no_language_azerty">Латиница (AZERTY)</string>
@@ -248,7 +247,7 @@
     <string name="theme_name_blue_gray" tools:keep="@string/theme_name_blue_gray">Серо-голубой</string>
     <string name="user_dict_add_word_button">Добавить слово</string>
     <string name="select_color_suggestion">Текст полосы предложений</string>
-    <string name="show_popup_keys_normal">Показать варианты, определённые в языках клавиатуры (по умолчанию)</string>
+    <string name="show_popup_keys_normal">Показать варианты, определённые в языках клавиатуры</string>
     <string name="show_popup_keys_more">Добавить распространённые варианты</string>
     <string name="replace_dictionary">Заменить словарь</string>
     <string name="button_add_to_language">Добавить в %s</string>
@@ -348,4 +347,57 @@
     <string name="cut" tools:keep="@string/cut">Вырезать</string>
     <string name="language_switch_key_behavior">Поведение клавиши смены языка</string>
     <string name="emoji" tools:keep="@string/emoji">Эмодзи</string>
+    <string name="pinned_toolbar_keys">Выбрать закреплённые клавиши панели инструментов</string>
+    <string name="quick_pin_toolbar_keys_summary">Это отключит остальные функции клавиш панели инструментов при длительном нажатии</string>
+    <string name="quick_pin_toolbar_keys">Закреплять клавиши панели инструментов при длительном нажатии</string>
+    <string name="toast_msg_clipboard_copy">Контент скопирован</string>
+    <string name="auto_show_toolbar">Показывать панель инструментов автоматически</string>
+    <string name="auto_hide_toolbar">Скрывать панель инструментов автоматически</string>
+    <string name="center_suggestion_text_to_enter">Всегда использовать среднее предложение</string>
+    <string name="center_suggestion_text_to_enter_summary">При нажатии точки или пунктуации будет использовано среднее предложение</string>
+    <string name="close_history" tools:keep="@string/close_history">Закрыть буфер обмена</string>
+    <string name="clipboard_toolbar_keys">Выбрать клавиши панели инструментов буфера обмена</string>
+    <string name="subtype_generic_extended"><xliff:g id="LANGUAGE_NAME" example="Kannada">%s</xliff:g> (Расширенная)</string>
+    <string name="auto_hide_toolbar_summary">Скрывать панель инструментов при появлении предложений</string>
+    <string name="settings_screen_toolbar">Панель инструментов</string>
+    <string name="auto_show_toolbar_summary">Показывать панель инструментов при вводе или при выборе текста</string>
+    <string name="more_colors">Показать больше цветов</string>
+    <string name="all_colors_warning">Эта настройка показывает все цвета, используемые внутри приложения. Список цветов может меняться. Цвет по умолчанию является случайным, и имена не будут переведены.</string>
+    <string name="layout_functional_keys_symbols_shifted" tools:keep="@string/layout_functional_keys_symbols_shifted">Функциональные клавиши (Дополнительные символы)</string>
+    <string name="customize_functional_key_layouts">Изменить раскладку функциональных клавиш</string>
+    <string name="layout_functional_keys" tools:keep="@string/layout_functional_keys">Функциональные клавиши</string>
+    <string name="layout_functional_keys_symbols" tools:keep="@string/layout_functional_keys_symbols">Функциональные клавиши (Символы)</string>
+    <string name="gesture_fast_typing_cooldown_instant">Всегда начинать немедленно</string>
+    <string name="gesture_fast_typing_cooldown">Время восстановления быстрой печати</string>
+    <string name="customize_currencies">Кастомизировать валюты</string>
+    <string name="customize_currencies_detail">Установить главные и до 6 дополнительных символа валют, разделённых пробелом</string>
+    <string name="load">Загрузить</string>
+    <string name="button_save_file">Сохранить в файл</string>
+    <string name="copy_to_clipboard">Скопировать в буфер обмена</string>
+    <string name="load_will_overwrite">Загрузка перезапишет текущую тему</string>
+    <string name="page_start" tools:keep="@string/page_start">Начало страницы</string>
+    <string name="page_end" tools:keep="@string/page_end">Конец страницы</string>
+    <string name="word_left" tools:keep="@string/word_left">Слово левее</string>
+    <string name="word_right" tools:keep="@string/word_right">Слово правее</string>
+    <string name="page_up" tools:keep="@string/page_up">Страница вверх</string>
+    <string name="page_down" tools:keep="@string/page_down">Страница вниз</string>
+    <string name="suggest_clipboard_content">Предложить содержимое буфера обмена</string>
+    <string name="suggest_clipboard_content_summary">Показать недавно скопированное содержимое буфера обмена в качестве предложения</string>
+    <string name="space_swipe_toggle_numpad_entry">Переключить цифровую клавиатуру</string>
+    <string name="switch_keyboard_after">Вернуться к основной клавиатуре после…</string>
+    <string name="after_emoji">Выбор эмодзи в режиме просмотра</string>
+    <string name="after_clip">Выбор записи из истории буфера обмена</string>
+    <string name="after_symbol_and_space">Нажатие Enter или пробела после других клавиш в режиме символов</string>
+    <string name="show_popup_keys_main">Добавить самые распространённые варианты (по умолчанию)</string>
+    <string name="remove_redundant_popups">Удалить лишние всплывающие окна</string>
+    <string name="remove_redundant_popups_summary">Убрать всплывающие клавиши, присутствующие в базовой раскладке</string>
+    <string name="layout_number_row" tools:keep="@string/layout_number_row">Строка цифр</string>
+    <string name="gesture_floating_preview_static_summary">Видеть предложенное слово во время набора жестами</string>
+    <string name="gesture_trail_fadeout_duration">Время жизни следа жеста</string>
+    <string name="prefs_space_bar_text">Пользовательский текст на клавише пробела</string>
+    <string name="layout_clip_bottom_row" tools:keep="@string/layout_clip_bottom_row">Строка буфера обмена внизу</string>
+    <string name="gesture_floating_preview_static">Плавающий предпросмотр</string>
+    <string name="gesture_floating_preview_dynamic_summary">Перемещать предпросмотр во время набора жестами</string>
+    <string name="layout_emoji_bottom_row" tools:keep="@string/layout_emoji_bottom_row">Строка эмодзи внизу</string>
+    <string name="icon_style">Стиль иконок</string>
 </resources>

@@ -20,6 +20,8 @@ import helium314.keyboard.keyboard.internal.keyboard_parser.addLocaleKeyTextsToP
 import helium314.keyboard.latin.R
 import helium314.keyboard.latin.common.Constants
 import helium314.keyboard.latin.common.FileUtils
+import helium314.keyboard.latin.settings.Settings
+import kotlinx.serialization.SerializationException
 import java.io.File
 import java.io.IOException
 import java.math.BigInteger
@@ -50,8 +52,10 @@ fun loadCustomLayout(uri: Uri?, languageTag: String, context: Context, onAdded: 
 
 fun loadCustomLayout(layoutContent: String, layoutName: String, languageTag: String, context: Context, onAdded: (String) -> Unit) {
     var name = layoutName
-    val isJson = checkLayout(layoutContent, context)
-        ?: return infoDialog(context, context.getString(R.string.layout_error, "invalid layout file, ${Log.getLog(10).lastOrNull { it.tag == TAG }?.message}"))
+    if (!checkLayout(layoutContent, context))
+        return infoDialog(context, context.getString(R.string.layout_error, "invalid layout file, ${Log.getLog(10).lastOrNull { it.tag == TAG }?.message}"))
+//    val isJson = checkLayout(layoutContent, context)
+//        ?: return infoDialog(context, context.getString(R.string.layout_error, "invalid layout file, ${Log.getLog(10).lastOrNull { it.tag == TAG }?.message}"))
 
     AlertDialog.Builder(context)
         .setTitle(R.string.title_layout_name_select)
@@ -64,7 +68,7 @@ fun loadCustomLayout(layoutContent: String, layoutName: String, languageTag: Str
         })
         .setPositiveButton(android.R.string.ok) { _, _ ->
             // name must be encoded to avoid issues with validity of subtype extra string or file name
-            name = "$CUSTOM_LAYOUT_PREFIX${languageTag}.${encodeBase36(name)}.${if (isJson) "json" else "txt"}"
+            name = "$CUSTOM_LAYOUT_PREFIX${languageTag}.${encodeBase36(name)}."
             val file = getCustomLayoutFile(name, context)
             if (file.exists())
                 file.delete()
@@ -75,30 +79,31 @@ fun loadCustomLayout(layoutContent: String, layoutName: String, languageTag: Str
         .show()
 }
 
-private fun checkLayout(layoutContent: String, context: Context): Boolean? {
+private fun checkLayout(layoutContent: String, context: Context): Boolean {
     val params = KeyboardParams()
     params.mId = KeyboardLayoutSet.getFakeKeyboardId(KeyboardId.ELEMENT_ALPHABET)
     params.mPopupKeyTypes.add(POPUP_KEYS_LAYOUT)
     addLocaleKeyTextsToParams(context, params, POPUP_KEYS_NORMAL)
     try {
         val keys = RawKeyboardParser.parseJsonString(layoutContent).map { row -> row.mapNotNull { it.compute(params)?.toKeyParams(params) } }
-        if (!checkKeys(keys))
-            return null
-        return true
-    } catch (e: Exception) { Log.w(TAG, "error parsing custom json layout", e) }
+        return checkKeys(keys)
+    } catch (e: SerializationException) {
+        Log.w(TAG, "json parsing error", e)
+    } catch (e: Exception) {
+        Log.w(TAG, "json layout parsed, but considered invalid", e)
+        return false
+    }
     try {
         val keys = RawKeyboardParser.parseSimpleString(layoutContent).map { row -> row.map { it.toKeyParams(params) } }
-        if (!checkKeys(keys))
-            return null
-        return false
+        return checkKeys(keys)
     } catch (e: Exception) { Log.w(TAG, "error parsing custom simple layout", e) }
-    if (layoutContent.trimStart().startsWith("[")) {
+    if (layoutContent.trimStart().startsWith("[") && layoutContent.trimEnd().endsWith("]")) {
         // layout can't be loaded, assume it's json -> load json layout again because the error message shown to the user is from the most recent error
         try {
             RawKeyboardParser.parseJsonString(layoutContent).map { row -> row.mapNotNull { it.compute(params)?.toKeyParams(params) } }
-        } catch (e: Exception) { Log.w(TAG, "error parsing custom json layout", e) }
+        } catch (e: Exception) { Log.w(TAG, "json parsing error", e) }
     }
-    return null
+    return false
 }
 
 private fun checkDeadKey(code: Int): Boolean {
@@ -223,16 +228,12 @@ fun editCustomLayout(layoutName: String, context: Context, startContent: String?
         .setView(editText)
         .setPositiveButton(R.string.save) { _, _ ->
             val content = editText.text.toString()
-            val isJson = checkLayout(content, context)
-            if (isJson == null) {
+            if (!checkLayout(content, context)) {
                 editCustomLayout(layoutName, context, content)
                 infoDialog(context, context.getString(R.string.layout_error, Log.getLog(10).lastOrNull { it.tag == TAG }?.message))
             } else {
-                val wasJson = file.name.substringAfterLast(".") == "json"
                 file.parentFile?.mkdir()
                 file.writeText(content)
-                if (isJson != wasJson) // unlikely to be needed, but better be safe
-                    file.renameTo(File(file.absolutePath.substringBeforeLast(".") + "." + if (isJson) "json" else "txt"))
                 onCustomLayoutFileListChanged()
                 KeyboardSwitcher.getInstance().forceUpdateKeyboardTheme(context)
             }

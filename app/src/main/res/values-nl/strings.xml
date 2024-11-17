@@ -45,7 +45,6 @@
     <string name="gesture_input_summary">Voer een woord in door van letter naar letter te vegen</string>
     <string name="gesture_preview_trail">Veegspoor weergeven</string>
     <string name="gesture_floating_preview_text">"Dynamisch zwevend voorbeeld"</string>
-    <string name="gesture_floating_preview_text_summary">Het voorgestelde woord tonen tijdens het vegen</string>
     <string name="gesture_space_aware">Woordgroepen gebaren</string>
     <string name="gesture_space_aware_summary">Spaties invoeren door te vegen over de spatiebalk</string>
     <string name="subtype_en_GB">"Engels (GB)"</string>
@@ -130,11 +129,11 @@
     <string name="delete_swipe">Verwijderen met veegbeweging</string>
     <string name="enable_clipboard_history">Klembordgeschiedenis inschakelen</string>
     <string name="more_keys_strip_description">Meer toetsen</string>
-    <string name="number_row_summary">Nummerrij altijd weergeven</string>
+    <string name="number_row_summary">Cijferregel altijd weergeven</string>
     <string name="delete_swipe_summary">Veeg vanaf de delete-toets om grotere stukken tekst in één keer te selecteren en verwijderen</string>
     <string name="spell_checker_service_name">HeliBoard spellingcontrole</string>
     <string name="android_spell_checker_settings">HeliBoard spellingscontrole instellingen</string>
-    <string name="number_row">Nummerrij</string>
+    <string name="number_row">Cijferregel</string>
     <string name="incognito">Incognito-modus afdwingen</string>
     <string name="show_emoji_key">Emoji-toets</string>
     <string name="settings_category_correction">Correcties</string>
@@ -167,7 +166,7 @@
     <string name="label_search_key">"Zoeken"</string>
     <string name="label_pause_key">"Pauze"</string>
     <string name="label_wait_key">"Wacht"</string>
-    <string name="one_handed" tools:keep="@string/one_handed">Enkele handmodus</string>
+    <string name="one_handed" tools:keep="@string/one_handed">Bediening met één hand</string>
     <string name="theme_name_pink" tools:keep="@string/theme_name_pink">Roze</string>
     <string name="theme_name_sand" tools:keep="@string/theme_name_sand">Zand</string>
     <string name="theme_name_violette" tools:keep="@string/theme_name_violette">Violet</string>
@@ -211,12 +210,12 @@
     <string name="url_detection_title">URL-detectie</string>
     <string name="url_detection_summary">Probeer URL\'s en dergelijke als één woord te detecteren</string>
     <string name="language_and_layouts_title">Talen &amp; lay-outs</string>
-    <string name="localized_number_row">Aangepaste nummerrij</string>
+    <string name="localized_number_row">Aangepaste Cijferregel</string>
     <string name="localized_number_row_summary">Voorkeur voor regionale cijfers i.p.v. latijns</string>
     <string name="hint_source">Bron voor hints kiezen</string>
     <string name="show_popup_hints_summary">Hints tonen als lang drukken op een toets extra functionaliteit activeert</string>
     <string name="popup_order">Volgorde pop-up toets kiezen</string>
-    <string name="popup_keys_number" tools:keep="@string/popup_keys_number">Nummerrij</string>
+    <string name="popup_keys_number" tools:keep="@string/popup_keys_number">Cijferregel</string>
     <string name="prefs_bottom_padding_scale">Bodemafstand schaal</string>
     <string name="title_layout_name_select">Naam van lay-out instellen</string>
     <string name="customize_symbols_number_layouts">Symbolen en nummer-lay-outs aanpassen</string>
@@ -314,7 +313,7 @@
     <string name="main_colors">Alleen hoofdkleuren weergeven</string>
     <string name="more_colors">Meer kleuren tonen</string>
     <string name="all_colors">Alle kleuren tonen</string>
-    <string name="all_colors_warning">Deze instelling toont alle kleuren bloot die intern worden gebruikt. De lijst met kleuren kan op elk moment veranderen. Er is geen standaardkleur en de namen worden niet vertaald.</string>
+    <string name="all_colors_warning">Deze instelling toont alle kleuren bloot die intern worden gebruikt. De lijst met kleuren kan op elk moment veranderen. Er is een willekeurige standaardkleur en de namen worden niet vertaald.</string>
     <string name="hint_show_keyboard">Klik voor een voorbeeld</string>
     <string name="select_color_background">Toetsenbord-achtergrond</string>
     <string name="select_color_key">Toetstekst</string>
@@ -340,9 +339,9 @@
     <string name="load_gesture_library_message">Een bibliotheek is nodig voor \'%s\'. Incompatibele bibliotheken kunnen crashen bij het typen van gebaren.
 \n
 \nWaarschuwing: het laden van externe code kan een veiligheidsrisico vormen. Gebruik alleen een bibliotheek van een vertrouwde bron.</string>
-    <string name="no_dictionary_message">"Zonder woordenboek krijg je alleen suggesties voor tekst die eerder is ingevoerd.&lt;br&gt;
-\n        Je kunt woordenboeken %1$s downloaden, of een woordenboek voor \"%2$s\" %3$s direct downloaden."</string>
-    <string name="show_popup_keys_normal">Varianten gedefinieerd in toetsenbordtalen weergeven (standaard)</string>
+    <string name="no_dictionary_message">Zonder woordenboek krijg je alleen suggesties voor tekst die eerder is ingevoerd.&lt;br&gt;
+\nJe kunt woordenboeken %1$s downloaden, of een woordenboek voor \"%2$s\" %3$s direct downloaden.</string>
+    <string name="show_popup_keys_normal">Varianten gedefinieerd in toetsenbordtalen weergeven</string>
     <string name="show_popup_hints">Functionele hints weergeven</string>
     <string name="subtype_no_language_bepo" tools:keep="@string/subtype_no_language_bepo">Alfabet (Bépo)</string>
     <string name="dictionary_file_wrong_locale">Het geselecteerde bestand is voor %1$s, maar %2$s werd verwacht. Toch gebruiken voor %2$s?</string>
@@ -353,13 +352,15 @@
     <string name="theme_name_ocean" tools:keep="@string/theme_name_ocean">Oceaan</string>
     <string name="hidden_features_message">► Lang drukken van vastgezette werkbalktoetsen resulteert in extra functionaliteit: &lt;br&gt;
 \n\t• klembord &amp;#65515; plakken&lt;br&gt;
-\n\t• links/rechts verplaatsen &amp;#65515; volledig links/rechts verplaatsen &lt;br&gt;
+\n\t• links/rechts verplaatsen &amp;#65515; woord links/rechts verplaatsen &lt;br&gt;
 \n\t• omhoog/omlaag verplaatsen &amp;#65515; pagina omhoog/omlaag &lt;br&gt;
-\n\t• kopiëren &amp;#65515; alles kopiëren &lt;br&gt;
-\n\t• woord selecteren &amp;#65515; alles selecteren&lt;br&gt;
+\n\t• woord links/rechts &amp;#65515; regel begin/einde &lt;br&gt;
+\n\t• pagina omhoog/omlaag &amp;#65515; pagina begin/einde &lt;br&gt;
+\n\t• kopiëren &amp;#65515; knippen &lt;br&gt;
+\n\t• woord selecteren &amp;#8596; alles selecteren&lt;br&gt;
 \n\t• ongedaan maken &amp;#8596; opnieuw &lt;br&gt; &lt;br&gt;
 \n► Lang drukken van toetsen in de suggestieregel zet deze daarin vast. &lt;br&gt; &lt;br&gt;
-\n► Lang drukken van de komma-toets om de klembordweergave, Emoji-weergave, Enkele handmodus, Instellingen, of de taal te wisselen: &lt;br&gt;
+\n► Lang drukken van de komma-toets om de klembordweergave, Emoji-weergave, Bediening met één hand, Instellingen, of de taal te wisselen: &lt;br&gt;
 \n\t• Emoji-weergave en taal-schakelaar verdwijnen wanneer de corresponderende toets is geactiveerd; &lt;br&gt;
 \n\t• Voor sommige lay-outs is het niet de komma-toets, maar de toets op dezelfde positie (bijvoorbeeld \\\'q\\\' bij een Dvorak-lay-out). &lt;br&gt; &lt;br&gt;
 \n► Wanneer incognitomodus is ingeschakeld, worden er geen woorden geleerd en worden er geen emoji\'s aan de lijst recent toegevoegd.&lt;br&gt; &lt;br&gt;
@@ -375,7 +376,7 @@
 \n► Je kunt woordenboeken toevoegen door ze te openen in een bestandsverkenner: &lt;br&gt;
 \n\t• Dit werkt alleen met &lt;i&gt;inhoud-uris&lt;/i&gt; en niet met &lt;i&gt;bestand-uris&lt;/i&gt;, wat betekent dat het mogelijk niet werkt met sommige bestandsverkenners. &lt;br&gt; &lt;br&gt;
 \n► Voor gebruikers die handmatige back-ups maken met roottoegang: &lt;br&gt;
-\n\t• Vanaf Android 7 bevindt het bestand met gedeelde voorkeuren zich niet op de standaardlocatie, omdat de app %s gebruikt. Dit is nodig zodat de instellingen kunnen worden gelezen voordat het apparaat wordt ontgrendeld, b.v. bij het opstarten; &lt;br&gt;
+\n\t• Vanaf Android 7 bevindt het bestand met gedeelde voorkeuren zich niet op de standaardlocatie, omdat de app %s gebruikt. Dit is nodig zodat de instellingen kunnen worden gelezen voordat het apparaat wordt ontgrendeld, bv. bij het opstarten; &lt;br&gt;
 \n\t• Het bestand bevindt zich in /data/user_de/0/package_id/shared_prefs/ hoewel dit kan afhangen van het apparaat en de Android-versie. &lt;br&gt; &lt;br&gt;
 \n&lt;i&gt;&lt;b&gt;Debug mode / debug APK&lt;/b&gt;&lt;/i&gt; &lt;br&gt; &lt;br&gt;
 \n► Druk lang op een suggestie om het bronwoordenboek te tonen. &lt;br&gt; &lt;br&gt;
@@ -401,4 +402,37 @@
     <string name="auto_show_toolbar_summary">Toon de werkbalk bij invoer of selectie van tekst</string>
     <string name="language_switch_key_behavior">Gedrag taalkeuze-toets</string>
     <string name="emoji" tools:keep="@string/emoji">Emoji</string>
+    <string name="gesture_fast_typing_cooldown_instant">Altijd direct starten</string>
+    <string name="gesture_fast_typing_cooldown">Afkoelperiode bij snel typen</string>
+    <string name="customize_currencies_detail">Stel tot 6 valutasymbolen in, gescheiden door spatie</string>
+    <string name="customize_currencies">Valuta aanpassen</string>
+    <string name="button_save_file">Opslaan naar bestand</string>
+    <string name="copy_to_clipboard">Kopiëren naar klembord</string>
+    <string name="load_will_overwrite">Laden zal het huidige thema overschrijven</string>
+    <string name="load">Laden</string>
+    <string name="page_end" tools:keep="@string/page_end">Pagina-einde</string>
+    <string name="page_start" tools:keep="@string/page_start">Pagina-begin</string>
+    <string name="word_left" tools:keep="@string/word_left">Woord links</string>
+    <string name="word_right" tools:keep="@string/word_right">Woord rechts</string>
+    <string name="page_up" tools:keep="@string/page_up">Pagina omhoog</string>
+    <string name="page_down" tools:keep="@string/page_down">Pagina omlaag</string>
+    <string name="suggest_clipboard_content">Inhoud van het klembord voorstellen</string>
+    <string name="suggest_clipboard_content_summary">Recent gekopieerde inhoud van het klembord tonen als suggestie</string>
+    <string name="space_swipe_toggle_numpad_entry">Numpad wisselen</string>
+    <string name="after_emoji">Emoji selecteren in de emoji-weergave</string>
+    <string name="after_clip">Vermelding in de klembordgeschiedenis selecteren</string>
+    <string name="switch_keyboard_after">Schakel over naar het hoofdtoetsenbord na…</string>
+    <string name="after_symbol_and_space">Drukken op enter of spatie na andere toetsen in de symbolenweergave</string>
+    <string name="show_popup_keys_main">Zeer veelgebruikte varianten toevoegen (standaard)</string>
+    <string name="remove_redundant_popups_summary">Pop-uptoetsen onderdrukken die aanwezig zijn in de basislay-out</string>
+    <string name="remove_redundant_popups">Overbodige pop-ups verwijderen</string>
+    <string name="gesture_floating_preview_dynamic_summary">Voorbeeld verplaatsen tijdens het gebaar</string>
+    <string name="gesture_trail_fadeout_duration">Levensduur van het veegspoor</string>
+    <string name="gesture_floating_preview_static">Zwevend voorbeeld</string>
+    <string name="gesture_floating_preview_static_summary">Zie het voorgestelde woord tijdens het gebaar</string>
+    <string name="icon_style">Pictogramstijl</string>
+    <string name="layout_number_row" tools:keep="@string/layout_number_row">Cijferregel</string>
+    <string name="prefs_space_bar_text">Aangepaste tekst op spatiebalk</string>
+    <string name="layout_clip_bottom_row" tools:keep="@string/layout_clip_bottom_row">Klembord onderste regel</string>
+    <string name="layout_emoji_bottom_row" tools:keep="@string/layout_emoji_bottom_row">Emoji onderste regel</string>
 </resources>

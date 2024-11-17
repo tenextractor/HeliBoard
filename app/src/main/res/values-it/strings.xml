@@ -16,7 +16,7 @@
     <string name="settings_screen_theme">"Tema"</string>
     <string name="enable_split_keyboard">"Attiva tastiera divisa"</string>
     <string name="language_switch_key_switch_input_method">Altri metodi di immissione</string>
-    <string name="show_language_switch_key">"Tasto cambio lingua"</string>
+    <string name="show_language_switch_key">Tasto di cambio lingua</string>
     <string name="abbreviation_unit_milliseconds">"<xliff:g id="MILLISECONDS">%s</xliff:g> ms"</string>
     <string name="settings_system_default">"Predefinito"</string>
     <string name="use_contacts_dict">"Suggerisci nomi di contatti"</string>
@@ -45,7 +45,6 @@
     <string name="gesture_input_summary">Digita le parole percorrendo con un gesto le lettere che le compongono</string>
     <string name="gesture_preview_trail">Mostra la traccia del gesto</string>
     <string name="gesture_floating_preview_text">"Anteprima mobile dinamica"</string>
-    <string name="gesture_floating_preview_text_summary">"Visualizza la parola suggerita durante il gesto"</string>
     <string name="gesture_space_aware">"Gesto frase"</string>
     <string name="gesture_space_aware_summary">Inserisci spazi durante i gesti facendo scorrere il dito sulla barra spaziatrice</string>
     <string name="subtype_en_GB">Inglese (Regno Unito)</string>
@@ -123,10 +122,10 @@
     <string name="more_keys_strip_description">Altri tasti</string>
     <string name="autospace_after_punctuation_summary">Alla digitazione di una nuova parola, inserisce automaticamente lo spazio dopo la punteggiatura</string>
     <string name="subtype_no_language_workman">Alfabeto (Workman)</string>
-    <string name="settings_category_clipboard_history">Cronologia appunti</string>
+    <string name="settings_category_clipboard_history">Cronologia degli appunti</string>
     <string name="abbreviation_unit_minutes"><xliff:g id="MINUTES">%s</xliff:g> min</string>
     <string name="settings_no_limit">Nessun limite</string>
-    <string name="enable_clipboard_history">Attiva la cronologia appunti</string>
+    <string name="enable_clipboard_history">Attiva la cronologia degli appunti</string>
     <string name="enable_clipboard_history_summary">Se disattivata, il tasto \'Appunti\' incolla direttamente l\'ultimo contenuto</string>
     <string name="clipboard_history_retention_time">Durata dei contenuti nella cronologia</string>
     <string name="spell_checker_service_name">HeliBoard - Controllo ortografico</string>
@@ -188,7 +187,7 @@
     <string name="right" tools:keep="@string/right">Cursore a destra</string>
     <string name="localized_number_row_summary">Mostra i numeri localizzati anziché quelli latini</string>
     <string name="checksum_mismatch_message">File di libreria sconosciuto. Si è sicuri di averlo ottenuto da una fonte affidabile e che sia per \'%s\'?</string>
-    <string name="show_popup_keys_normal">Mostra le varianti definite dalle lingue della tastiera (impostazione predefinita)</string>
+    <string name="show_popup_keys_normal">Mostra le varianti di carattere definite dalla lingua</string>
     <string name="show_popup_keys_more">Aggiungi varianti comuni</string>
     <string name="clipboard" tools:keep="@string/clipboard">Appunti</string>
     <string name="popup_keys_number" tools:keep="@string/popup_keys_number">Riga dei numeri</string>
@@ -203,14 +202,14 @@
     <string name="backup_error">Errore backup: %s</string>
     <string name="show_popup_hints_summary">Indica se premendo a lungo un tasto si attivano funzionalità aggiuntive</string>
     <string name="backup_restore_title">Backup e ripristino</string>
-    <string name="full_left" tools:keep="@string/full_left">Cursore tutto a sinistra</string>
+    <string name="full_left" tools:keep="@string/full_left">Inizio riga</string>
     <string name="select_word" tools:keep="@string/select_word">Seleziona parola</string>
     <string name="left" tools:keep="@string/left">Cursore a sinistra</string>
     <string name="delete_layout">Vuoi davvero eliminare il layout personalizzato %s?</string>
     <string name="button_title_add_custom_layout">Aggiungi un layout personalizzato</string>
     <string name="popup_keys_symbols" tools:keep="@string/popup_keys_symbols">Simboli</string>
     <string name="url_detection_title">Rilevamento URL</string>
-    <string name="full_right" tools:keep="@string/full_right">Cursore tutto a destra</string>
+    <string name="full_right" tools:keep="@string/full_right">Fine riga</string>
     <string name="localized_number_row">Localizza la riga dei numeri</string>
     <string name="show_popup_keys_all">Aggiungi tutte le varianti disponibili</string>
     <string name="more_autocorrect">Correzione automatica aggiuntiva</string>
@@ -218,13 +217,13 @@
     <string name="prefs_always_show_suggestions_summary">Ignora la richiesta di altre applicazioni di disabilitare i suggerimenti (potrebbe causare problemi)</string>
     <string name="title_layout_name_select">Nome del layout</string>
     <string name="switch_language">Cambia lingua</string>
-    <string name="clear_clipboard" tools:keep="@string/clear_clipboard">Pulisci appunti</string>
+    <string name="clear_clipboard" tools:keep="@string/clear_clipboard">Svuota gli appunti</string>
     <string name="prefs_narrow_key_gaps">Riduci lo spazio tra i tasti</string>
     <string name="disable_personalized_dicts_message">Attenzione: la disattivazione di questa impostazione cancellerà tutti i dati memorizzati</string>
     <string name="load_gesture_library_button_load">Carica libreria</string>
     <string name="button_load_custom">Carica file</string>
     <string name="button_copy_existing_layout">Duplica un layout esistente</string>
-    <string name="show_popup_keys_title">Mostra più lettere accentate</string>
+    <string name="show_popup_keys_title">Mostra più lettere accentate nei tasti a comparsa</string>
     <string name="one_handed" tools:keep="@string/one_handed">Modalità a una mano</string>
     <string name="layout_error">Errore layout: %s</string>
     <string name="secondary_locale">Digitazione multilingue</string>
@@ -243,13 +242,13 @@
     <string name="setup_step3_action">Configura la tastiera</string>
     <string name="day_or_night_night">Scuro</string>
     <string name="prefs_bottom_padding_scale">Spaziatura dal bordo in basso</string>
-    <string name="select_user_colors_night">Colori (Tema scuro)</string>
+    <string name="select_user_colors_night">Colori personalizzati (tema scuro)</string>
     <string name="theme_name_dark" tools:keep="@string/theme_name_dark">Scuro</string>
     <string name="main_colors">Mostra solo i colori principali</string>
     <string name="theme_name_dynamic" tools:keep="@string/theme_name_dynamic">Colori dinamici</string>
     <string name="settings_screen_appearance">Aspetto</string>
     <string name="select_color_key_background">Sfondo tasti</string>
-    <string name="theme_colors">Colori (tema chiaro)</string>
+    <string name="theme_colors">Tema chiaro</string>
     <string name="select_color_functional_key_background">Sfondo dei tasti funzione</string>
     <string name="user_dict_word_already_present">La parola è già presente nel dizionario utente %s.</string>
     <string name="style_name_Rounded" tools:keep="@string/style_name_Rounded">Arrotondato</string>
@@ -275,7 +274,7 @@
     <string name="user_dict_add_word_button">Aggiungi una parola</string>
     <string name="select_color_suggestion">Testo dei suggerimenti</string>
     <string name="hint_show_keyboard">Tocca per vedere l\'anteprima</string>
-    <string name="theme_name_user" tools:keep="@string/theme_name_user">Personalizzato (Tema chiaro)</string>
+    <string name="theme_name_user" tools:keep="@string/theme_name_user">Personalizzato (tema chiaro)</string>
     <string name="replace_dictionary">Sostituisci dizionario</string>
     <string name="button_add_to_language">Aggiungi a %s</string>
     <string name="select_color_background">Sfondo della tastiera</string>
@@ -293,11 +292,11 @@
     <string name="theme_name_sand" tools:keep="@string/theme_name_sand">Sabbia</string>
     <string name="theme_style">Stile</string>
     <string name="hidden_features_summary">Mostra le funzionalità che potrebbero passare inosservate</string>
-    <string name="theme_colors_night">Colori (tema scuro)</string>
+    <string name="theme_colors_night">Tema scuro</string>
     <string name="all_colors">Mostra tutti i colori</string>
     <string name="select_user_colors_summary">Seleziona i colori per il testo e gli sfondi</string>
     <string name="select_color_key_hint">Caratteri degli indicatori dei tasti</string>
-    <string name="theme_name_user_night" tools:keep="@string/theme_name_user_night">Personalizzato (Tema scuro)</string>
+    <string name="theme_name_user_night" tools:keep="@string/theme_name_user_night">Personalizzato (tema scuro)</string>
     <string name="theme_name_brown" tools:keep="@string/theme_name_brown">Marrone</string>
     <string name="replace_dictionary_message">Vuoi davvero sostituire il dizionario aggiunto dall\'utente \"%1$s\"?
 \n
@@ -316,7 +315,7 @@
     <string name="dialog_close">Chiudi</string>
     <string name="select_color_gesture">Traccia dell\'input gestuale</string>
     <string name="text_tap_languages">Tocca la lingua per aprire le impostazioni</string>
-    <string name="select_user_colors">Colori (Tema chiaro)</string>
+    <string name="select_user_colors">Colori personalizzati (tema chiaro)</string>
     <string name="save_log">Salva log</string>
     <string name="theme_name_holo_white" tools:keep="@string/theme_name_holo_white">Holo bianco</string>
     <string name="internal_dictionary_summary">Dizionario interno principale</string>
@@ -345,9 +344,11 @@
     <string name="select_color_accent">Colore accento</string>
     <string name="hidden_features_message">► La pressione prolungata dei tasti fissati sulla barra degli strumenti attivano funzionalità aggiuntive:
 \n\t• Appunti &amp;#65515; Incolla&lt;br&gt;
-\n\t• Sposta a sinistra/destra &amp;#65515; Sposta all\'inizio o alla fine della riga&lt;br&gt;
-\n\t• Sposta su/giù &amp;#65515; Pagina su/giù&lt;br&gt;
-\n\t• Copia &amp;#65515; Copia tutto&lt;br&gt;
+\n\t• Cursore a sinistra/destra &amp;#65515; Parola a sinistra/destra&lt;br&gt;
+\n\t• Cursore su/giù &amp;#65515; Pagina su/giù&lt;br&gt;
+\n\t• Parola a sinistra/destra &amp;#65515; Inizio/fine riga&lt;br&gt;
+\n\t• Pagina su/giù &amp;#65515; Inizio/fine documento&lt;br&gt;
+\n\t• Copia &amp;#65515; Taglia&lt;br&gt;
 \n\t• Seleziona parola &amp;#65515; Seleziona tutto&lt;br&gt;
 \n\t• Annulla &amp;#8596; Ripristina&lt;br&gt;&lt;br&gt;
 \n► La pressione prolungata dei tasti nella barra dei suggerimenti li blocca sulla barra.
@@ -387,13 +388,42 @@
     <string name="layout_functional_keys_symbols_shifted" tools:keep="@string/layout_functional_keys_symbols_shifted">Tasti funzione (Altri simboli)</string>
     <string name="settings_screen_toolbar">Barra degli strumenti</string>
     <string name="center_suggestion_text_to_enter">Usa sempre la parola suggerita al centro</string>
-    <string name="close_history" tools:keep="@string/close_history">Chiudi la cronologia appunti</string>
-    <string name="clipboard_toolbar_keys">Seleziona i tasti mostrati insieme alla cronologia appunti</string>
+    <string name="close_history" tools:keep="@string/close_history">Chiudi la cronologia degli appunti</string>
+    <string name="clipboard_toolbar_keys">Seleziona i tasti mostrati insieme alla cronologia degli appunti</string>
     <string name="language_switch_key_behavior">Comportamento del tasto di cambio lingua</string>
     <string name="center_suggestion_text_to_enter_summary">All\'aggiunta di uno spazio o di un segno di punteggiatura, il suggerimento centrale è inserito automaticamente</string>
     <string name="customize_functional_key_layouts">Personalizza i layout dei tasti funzione</string>
     <string name="toast_msg_clipboard_copy">Testo copiato</string>
     <string name="subtype_mns">Mansi</string>
     <string name="more_colors">Mostra altri colori</string>
-    <string name="all_colors_warning">Questa impostazione mostra tutti i colori utilizzati internamente. L\'elenco dei colori può cambiare in qualsiasi momento. Non esiste un colore predefinito e i nomi non sono tradotti.</string>
+    <string name="all_colors_warning">Questa impostazione mostra tutti i colori utilizzati internamente. L\'elenco dei colori potrebbe variare in base agli aggiornamenti dell\'app. I colori predefiniti sono casuali e i nomi degli elementi sono mostrati come stringhe di sistema.</string>
+    <string name="emoji" tools:keep="@string/emoji">Emoji</string>
+    <string name="gesture_fast_typing_cooldown">Attesa per l\'inserimento gestuale</string>
+    <string name="gesture_fast_typing_cooldown_instant">Nessuna</string>
+    <string name="customize_currencies">Personalizza i tasti valuta</string>
+    <string name="customize_currencies_detail">Scegli fino a 6 tasti valuta secondari, separati da spazio</string>
+    <string name="load">Importa</string>
+    <string name="button_save_file">Esporta (file)</string>
+    <string name="word_left" tools:keep="@string/word_left">Parola a sinistra</string>
+    <string name="word_right" tools:keep="@string/word_right">Parola a destra</string>
+    <string name="page_start" tools:keep="@string/page_start">Inizio documento</string>
+    <string name="page_end" tools:keep="@string/page_end">Fine documento</string>
+    <string name="suggest_clipboard_content">Suggerisci il testo copiato</string>
+    <string name="suggest_clipboard_content_summary">Mostra l\'ultimo testo copiato negli appunti nella barra dei suggerimenti</string>
+    <string name="copy_to_clipboard">Copia negli appunti</string>
+    <string name="switch_keyboard_after">Torna alla tastiera principale…</string>
+    <string name="after_emoji">Dopo l\'inserimento di un\'emoji dalla schermata emoji</string>
+    <string name="after_symbol_and_space">Dopo l\'inserimento di un carattere dalla schermata simboli, seguito da uno spazio o un \'a capo\'</string>
+    <string name="after_clip">Dopo l\'inserimento di un testo dalla cronologia degli appunti</string>
+    <string name="show_popup_keys_main">Aggiungi varianti molto comuni (impostazione predefinita)</string>
+    <string name="page_up" tools:keep="@string/page_up">Pagina su</string>
+    <string name="page_down" tools:keep="@string/page_down">Pagina giù</string>
+    <string name="space_swipe_toggle_numpad_entry">Passa al tastierino numerico</string>
+    <string name="remove_redundant_popups">Rimuovi i tasti a comparsa ripetuti</string>
+    <string name="remove_redundant_popups_summary">Rimuovi i tasti a comparsa già presenti nel layout base</string>
+    <string name="load_will_overwrite">Attenzione: l\'importazione sovrascriverà il tema attuale</string>
+    <string name="gesture_floating_preview_static_summary">Mostra dinamicamente le parole suggerite durante l\'inserimento</string>
+    <string name="gesture_trail_fadeout_duration">Durata della traccia del gesto</string>
+    <string name="gesture_floating_preview_static">Anteprima mobile dinamica</string>
+    <string name="gesture_floating_preview_dynamic_summary">Sposta l\'anteprima seguendo il gesto</string>
 </resources>

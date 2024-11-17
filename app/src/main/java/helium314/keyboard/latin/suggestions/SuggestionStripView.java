@@ -13,7 +13,6 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -26,7 +25,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,6 +42,7 @@ import helium314.keyboard.keyboard.Keyboard;
 import helium314.keyboard.keyboard.KeyboardSwitcher;
 import helium314.keyboard.keyboard.MainKeyboardView;
 import helium314.keyboard.keyboard.PopupKeysPanel;
+import helium314.keyboard.keyboard.internal.KeyboardIconsSet;
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode;
 import helium314.keyboard.latin.AudioAndHapticFeedbackManager;
 import helium314.keyboard.latin.Dictionary;
@@ -59,7 +58,6 @@ import helium314.keyboard.latin.settings.Settings;
 import helium314.keyboard.latin.settings.SettingsValues;
 import helium314.keyboard.latin.suggestions.PopupSuggestionsView.MoreSuggestionsListener;
 import helium314.keyboard.latin.utils.DeviceProtectedUtils;
-import helium314.keyboard.latin.utils.DialogUtilsKt;
 import helium314.keyboard.latin.utils.Log;
 import helium314.keyboard.latin.utils.ToolbarKey;
 import helium314.keyboard.latin.utils.ToolbarUtilsKt;
@@ -69,7 +67,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 
 public final class SuggestionStripView extends RelativeLayout implements OnClickListener,
         OnLongClickListener {
@@ -110,7 +107,7 @@ public final class SuggestionStripView extends RelativeLayout implements OnClick
 
     private final SuggestionStripLayoutHelper mLayoutHelper;
     private final StripVisibilityGroup mStripVisibilityGroup;
-    private boolean isInlineAutofillSuggestionsVisible = false; // Required to disable the more suggestions if inline autofill suggestions are visible
+    private boolean isExternalSuggestionVisible = false; // Required to disable the more suggestions if other suggestions are visible
 
     private static class StripVisibilityGroup {
         private final View mSuggestionStripView;
@@ -184,18 +181,17 @@ public final class SuggestionStripView extends RelativeLayout implements OnClick
                 R.dimen.config_more_suggestions_modal_tolerance);
         mMoreSuggestionsSlidingDetector = new GestureDetector(context, mMoreSuggestionsSlidingListener);
 
-        @SuppressLint("CustomViewStyleable")
-        final TypedArray keyboardAttr = context.obtainStyledAttributes(attrs, R.styleable.Keyboard, defStyle, R.style.SuggestionStripView);
-        mIncognitoIcon = keyboardAttr.getDrawable(R.styleable.Keyboard_iconIncognitoKey);
-        mToolbarArrowIcon = keyboardAttr.getDrawable(R.styleable.Keyboard_iconToolbarKey);
-        mBinIcon = keyboardAttr.getDrawable(R.styleable.Keyboard_iconBin);
+        final KeyboardIconsSet iconsSet = KeyboardIconsSet.Companion.getInstance();
+        mIncognitoIcon = iconsSet.getNewDrawable(ToolbarKey.INCOGNITO.name(), context);
+        mToolbarArrowIcon = iconsSet.getNewDrawable(KeyboardIconsSet.NAME_TOOLBAR_KEY, context);
+        mBinIcon = iconsSet.getNewDrawable(KeyboardIconsSet.NAME_BIN, context);
 
         final LinearLayout.LayoutParams toolbarKeyLayoutParams = new LinearLayout.LayoutParams(
                 getResources().getDimensionPixelSize(R.dimen.config_suggestions_strip_edge_key_width),
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
         for (final ToolbarKey key : ToolbarUtilsKt.getEnabledToolbarKeys(prefs)) {
-            final ImageButton button = createToolbarKey(context, keyboardAttr, key);
+            final ImageButton button = createToolbarKey(context, iconsSet, key);
             button.setLayoutParams(toolbarKeyLayoutParams);
             setupKey(button, colors);
             mToolbar.addView(button);
@@ -219,7 +215,7 @@ public final class SuggestionStripView extends RelativeLayout implements OnClick
         mToolbarExpandKey.getLayoutParams().width *= 0.82;
 
         for (final ToolbarKey pinnedKey : ToolbarUtilsKt.getPinnedToolbarKeys(prefs)) {
-            final ImageButton button = createToolbarKey(context, keyboardAttr, pinnedKey);
+            final ImageButton button = createToolbarKey(context, iconsSet, pinnedKey);
             button.setLayoutParams(toolbarKeyLayoutParams);
             setupKey(button, colors);
             mPinnedKeys.addView(button);
@@ -229,7 +225,6 @@ public final class SuggestionStripView extends RelativeLayout implements OnClick
         }
 
         colors.setBackground(this, ColorType.STRIP_BACKGROUND);
-        keyboardAttr.recycle();
     }
 
     /**
@@ -258,7 +253,7 @@ public final class SuggestionStripView extends RelativeLayout implements OnClick
                 : km.isKeyguardLocked();
         mToolbarExpandKey.setOnClickListener(hideToolbarKeys ? null : this);
         mPinnedKeys.setVisibility(hideToolbarKeys ? GONE : mSuggestionsStrip.getVisibility());
-        isInlineAutofillSuggestionsVisible = false;
+        isExternalSuggestionVisible = false;
     }
 
     public void setRtl(final boolean isRtlLanguage) {
@@ -281,9 +276,9 @@ public final class SuggestionStripView extends RelativeLayout implements OnClick
                 getContext(), mSuggestedWords, mSuggestionsStrip, this);
     }
 
-    public void setInlineSuggestionsView(final View view) {
+    public void setExternalSuggestionView(final View view) {
         clear();
-        isInlineAutofillSuggestionsVisible = true;
+        isExternalSuggestionVisible = true;
         mSuggestionsStrip.addView(view);
         if (Settings.getInstance().getCurrent().mAutoHideToolbar)
             setToolbarVisibility(false);
@@ -413,7 +408,7 @@ public final class SuggestionStripView extends RelativeLayout implements OnClick
             wordView.setEllipsize(TextUtils.TruncateAt.END);
             AtomicBoolean downOk = new AtomicBoolean(false);
             wordView.setOnTouchListener((view1, motionEvent) -> {
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP && downOk.get()) {
                     final float x = motionEvent.getX();
                     final float y = motionEvent.getY();
                     if (0 < x && x < w && 0 < y && y < h) {
@@ -548,7 +543,7 @@ public final class SuggestionStripView extends RelativeLayout implements OnClick
     public boolean onInterceptTouchEvent(final MotionEvent me) {
 
         // Disable More Suggestions if inline autofill suggestions is visible
-        if(isInlineAutofillSuggestionsVisible) {
+        if(isExternalSuggestionVisible) {
             return false;
         }
 

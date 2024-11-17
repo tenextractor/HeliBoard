@@ -99,12 +99,12 @@ public final class RichInputConnection implements PrivateCommandPerformer {
      * It's not really the selection start position: the selection start may not be there yet, and
      * in some cases, it may never arrive there.
      */
-    public int mExpectedSelStart = INVALID_CURSOR_POSITION; // in chars, not code points
+    private int mExpectedSelStart = INVALID_CURSOR_POSITION; // in chars, not code points
     /**
      * The expected selection end.  Only differs from mExpectedSelStart if a non-empty selection is
      * expected.  The same caveats as mExpectedSelStart apply.
      */
-    public int mExpectedSelEnd = INVALID_CURSOR_POSITION; // in chars, not code points
+    private int mExpectedSelEnd = INVALID_CURSOR_POSITION; // in chars, not code points
     /**
      * This contains the committed text immediately preceding the cursor and the composing
      * text, if any. It is refreshed when the cursor moves by calling upon the TextView.
@@ -361,6 +361,11 @@ public final class RichInputConnection implements PrivateCommandPerformer {
 
     public boolean canDeleteCharacters() {
         return mExpectedSelStart > 0;
+    }
+
+    public boolean noTextAfterCursor() {
+        final CharSequence after = getTextAfterCursor(1, 0);
+        return TextUtils.isEmpty(after);
     }
 
     /**
@@ -723,12 +728,17 @@ public final class RichInputConnection implements PrivateCommandPerformer {
 
     public void selectAll() {
         if (!isConnected()) return;
-        mIC.performContextMenuAction(android.R.id.selectAll);
+        if (mExpectedSelStart != mExpectedSelEnd && mExpectedSelStart == 0 && noTextAfterCursor()) { // all text already selected
+            mIC.setSelection(mExpectedSelEnd, mExpectedSelEnd);
+        } else mIC.performContextMenuAction(android.R.id.selectAll);
     }
 
     public void selectWord(final SpacingAndPunctuations spacingAndPunctuations, final String script) {
         if (!isConnected()) return;
-        if (mExpectedSelStart != mExpectedSelEnd) return; // already something selected
+        if (mExpectedSelStart != mExpectedSelEnd) { // already something selected
+            mIC.setSelection(mExpectedSelEnd, mExpectedSelEnd);
+            return;
+        }
         final TextRange range = getWordRangeAtCursor(spacingAndPunctuations, script);
         if (range == null) return;
         mIC.setSelection(mExpectedSelStart - range.getNumberOfCharsInWordBeforeCursor(), mExpectedSelStart + range.getNumberOfCharsInWordAfterCursor());

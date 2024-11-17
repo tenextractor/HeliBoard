@@ -10,7 +10,10 @@ tl;dr:
 * a single issue per topic
 * reduce screenshot size
 
-<!-- issue template below, please remove above text before submitting (and the template too if you think it's a good idea) -->
+<!--
+issue template below, please remove above text before submitting (and the template too if you think it's a good idea)
+Please choose a meaningful title for your issue
+-->
 
 **Describe the bug**
 
@@ -21,7 +24,7 @@ If possible, provide all the necessary steps to reproduce your problem, includin
 If it's not obvious (e.g. not crash), describe how you think the app should behave.
 
 **Screenshots**
-ONLY add screenshots if applicable and helpful.
+ONLY add screenshots when they add real value.
 If you add screenshots, reduce the size or use thumbnails to keep the issue nicely readable.
 
 **App version**

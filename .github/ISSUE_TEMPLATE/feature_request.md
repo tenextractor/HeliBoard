@@ -8,9 +8,12 @@ Please see the appropriate readme section for issue reporting guidelines: https:
 tl;dr:
 * search for duplicates, also in closed issues
 * a single issue per topic
-* reduce screenshot size
+* ONLY add screenshots when necessary, and reduce their size
 
-<!-- issue template below, please remove above text before submitting (and the template too if you think it's a good idea) -->
+<!--
+issue template below, please remove above text before submitting (and the template too if you think it's a good idea)
+Please choose a meaningful title for your issue
+-->
 
 **Is your feature request related to a problem? Please describe.**
 
